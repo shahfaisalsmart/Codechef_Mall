@@ -1,0 +1,201 @@
+///==================================================///
+///               !! HELLO WORLD !!                  ///
+///                 >>IT'S ME<<                      ///
+///               MOHAMMAD FAISAL                    ///
+///==================================================///
+//THIS CODE IS IMPLEMENTED BY FAISAL_98(MOHAMMAD FAISAL)
+// author: MOHAMMAD FAISAL (email: mohammad.faisal78612@gmail.com)
+/*
+ 
+        _/ _/ _/ _/  _/ _/ _/ _/   _/  _/ _/ _/   _/ _/ _/ _/  _/
+       _/           _/       _/   _/  _/         _/       _/  _/
+      _/ _/ _/     _/ _/ _/ _/   _/  _/ _/ _/   _/ _/ _/ _/  _/
+     _/           _/       _/   _/        _/   _/       _/  _/
+    _/           _/       _/   _/  _/ _/ _/   _/       _/  _/ _/ _/ _/
+ 
+ */
+#include<bits/stdc++.h>
+using namespace std ;
+#define test() int t; cin >> t; while(t--)
+#define ll long long
+#define ull unsigned long long int
+#define ld long double
+#define lop(i,n) for(int i=0;i<n;i++)
+#define rloop(i,n) for (int i = n-1; i >= 0; i--)
+#define loop(x, n) for(ll x = 0; x < n; ++ x)
+#define rep(x,n) for(ll x=1;x<=n;x++)
+#define Rrep(x,n) for(int x=1;x<n;x++)
+#define mp make_pair
+#define pb push_back
+#define I cin>>
+#define O cout<<
+#define W(x) while(x--)
+#define si(x) scanf("%d",&x)
+#define pi(x) printf("%d\n",x)
+#define s(x) scanf("%lld",&x)
+#define p(x) printf("%lld\n",x)
+#define sc(x) scanf("%s",x)
+#define pc(x) printf("%s",x)
+#define pii pair<int,int>
+#define pll pair<ll,ll>
+#define F first
+#define S second
+#define inf 1e18
+#define MAX 10000000
+#define M 1000000007
+#define gcd(a,b) __gcd((a),(b))
+#define lcm(a,b) ((a)*(b))/gcd((a),(b))
+#define prec(x) fixed<<setprecision(15)<<x
+#define all(x) x.begin(),x.end()
+#define rall(x) x.rbegin(),x.rend()
+#define magic ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0)
+#define XXX return 0;
+#define br cout<<endl;
+const double PI=3.141592653589793238462643383279502884197169399375105820974944;
+//const ll inf = 1000000000;
+//const ll MOD = 1000000007;
+vector<bool> chkprime (MAX,true);
+unsigned primearray[5761459];
+
+ll GCD(ll a,ll b)
+{
+    if(b==0)
+        return a;
+    else 
+        return gcd(b,a%b);
+}
+void n_primes(){
+    chkprime[0]=chkprime[1]=false;
+    for(unsigned i=2;i*i<=MAX;i++){
+        if(chkprime[i]){
+            for(unsigned j=i;j*i<=MAX;j++) chkprime[i*j]=false;
+        }
+    }
+    unsigned id = 1;
+    primearray[0]=2;
+    
+    for(int i=3;i<=MAX;i+=2){
+        if(chkprime[i]){
+            primearray[id++]=i;
+        }
+    }
+}
+
+bool primity(long long n)
+{
+    if(n<=1)
+        return false;
+    if(n<=3)
+        return true;
+    
+    if(n%2==0 || n%3==0)
+        return false;
+    
+    for(auto i=5; i*i<=n; i+=6)
+        if(n%i==0 || n%(i+2)==0)
+            return false;
+    
+    return true;
+}
+
+int power_x(int x, unsigned y)
+{
+    if(y==0)
+        return 1;
+    if(!(y&1))
+        return power_x(x,y>>1)*power_x(x,y>>1);
+    return x*power_x(x,y>>1)*power_x(x,y>>1);
+}
+
+int order_x(long long x)
+{
+    int n=0;
+    while(x)
+    {
+        n++;
+        x/=10;
+    }
+    return n;
+}
+bool is_perfect_square(int n) {
+    if (n < 0)
+        return false;
+    int root(round(sqrt(n)));
+    return n == root * root;
+}
+
+bool is_perfect_cube(int n) {
+    int root(round(cbrt(n)));
+    return n == root * root * root;
+}
+
+/*bool isArm(long long n)
+ {
+ int pow=order_x(n);
+ long long temp=n,sum=0;
+ while(temp)
+ {
+ int r=temp%10;
+ sum+=power_x(r,pow);
+ temp/=10;
+ }
+ if(sum==n)
+ return true;
+ else
+ return false;
+ }*/
+ll toy(ll arr[],int n,ll e)
+{
+    ll temp = arr[0];
+    Rrep(i,n)
+        if(arr[i]!=e)
+            temp = GCD(temp,arr[i]);
+    return temp;   
+}
+ll car(ll arr[],int n,ll e)
+{
+    ll temp = arr[0];
+    Rrep(i,n)
+        if(arr[i]!=e)
+            temp= GCD(temp,arr[i]);
+    return temp;   
+}
+int main ()
+{
+    magic;
+    /*
+     
+     O
+    <C>
+     /\
+     
+     */
+    test()
+    {
+        int n;
+        I n;
+        set<ll>dup;
+        ll a[n];
+        lop(i,n)
+            {I a[i];dup.insert(a[i]);}
+        if(dup.size()==1)
+            O (a[0]<<1);
+        else
+        {
+            ll smx,mx;
+            sort(a,a+n);
+            mx = a[n-1];
+            rloop(i,n)
+                if(a[i]!=mx)
+                    {smx=a[i];break;}
+            //O mx<<" "<<smx<<endl;
+            ll gc1,gc2;
+            gc1 = toy(a,n,mx);
+            gc2 = car(a,n,smx);
+            gc1+=mx;gc2+=smx;
+            O max(gc1,gc2);
+        }
+        br
+    }
+    XXX
+}
